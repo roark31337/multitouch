@@ -1,0 +1,11 @@
+.imgContainer {
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+}
+
+img {
+  /*-webkit-transition: all 1s ease-in-out;*/
+  width: 300px;
+  height: 200px;
+}

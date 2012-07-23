@@ -1,0 +1,24 @@
+{
+    "name": "Analog Devices",
+    "description": "Demo",
+    "version": "1.0",
+    "devices": [
+        "iPhone",
+        "Android"
+    ],
+    "platformConfig": {
+        "android": {
+            "nativeNavigation": true
+        },
+        "iOS": {
+            "nativeNavigation": true,
+            "launchMode": "hideNavigation"
+        }
+    },
+    "views": [
+        {
+            "navigationTitle": "Home",
+            "uri": "./html/example.html",
+        },
+    ]
+}
