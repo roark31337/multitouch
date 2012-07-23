@@ -16,7 +16,9 @@ $(bc).on("init", function() {
       scaleFactor = 1,
       previousScaleFactor = 1,
       originalImgWidth,
-      originalImgHeight;
+      originalImgHeight,
+      dragStartX = 0,
+      dragStartY = 0;
 
   bc.config.touchEventsEnabled = false;
   $("img").hammer().on("doubletap", function() {
@@ -54,7 +56,14 @@ $(bc).on("init", function() {
   .on("transformend", function() {
     previousScaleFactor = scaleFactor;
   })
+  .on("dragstart", function(evt) {
+    dragStartX = evt.position.x;
+    dragStartY = evt.position.y;
+  })
   .on("drag", function(evt) {
-    $("#debug").text(evt.position);
+    var deltaX = evt.position.x - dragStartY,
+        deltaY = evt.position.y - dragStartY;
+    $("#debug").text(deltaX);
+    $(".imgContainer").css("-webkit-transform", "translate(" + deltaX + "px, " + deltaY + "px)");
   });
 });
