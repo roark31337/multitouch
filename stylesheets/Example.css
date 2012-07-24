@@ -1,14 +1,94 @@
+/**
+ * 3d flip effect, turn on sound
+ * bg sound
+ */
+body {
+  background-image: url("../images/background-image.jpg");
+  background-size: 100% 100%;
+  background-position: top left;
+  background-repeat: no-repeat;
+}
+
 .imgContainer {
   width: 300px;
   height: 200px;
-  overflow: hidden;
+  left: 200px;  
   position: absolute;
-  top: 0px;
-  left: 0px;
+  padding: 10px 10px 60px 10px;
+  background: #F9F9F9;
+  border: 1px solid #FFF;
+  -webkit-box-shadow: 3px 3px 11px 5px #222;
+  -webkit-transform-style: preserve-3d;  
+}
+
+.first {
+  top: 60px;
+  left: 350px;
+  -webkit-transform: rotate(20deg);
+}
+
+.second {
+  top: 400px;
+  left: 50px;
+  -webkit-transform: rotate(-20deg);  
+}
+
+.third {
+  top: 520px;
+  width: 400px;
+  height: 300px;
+  -webkit-transform: rotate(10deg);    
+}
+
+.fourth {
+  left: 350px;
+  top: 400px;
+  width: 250px;
+  height: 150px;
+  -webkit-transform: rotate(10deg);    
+}
+
+.fifth {
+  left: 100px;
+  top: 10px;
+  width: 250px;
+  height: 150px;
+}
+
+.imgContainer p {
+  position: absolute;
+  bottom: 15px;
+  width: 100%; 
+  text-align: center;
+  font: 400 22px 'Niccone', cursive;
+  color: #333;
 }
 
 img {
-  /*-webkit-transition: all 1s ease-in-out;*/
-  width: 300px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
+}
+
+#debug {
+  position: absolute;
+  top: 400px;
+}
+
+.dragging {
+  background: #FFF;  
+  -webkit-box-shadow: 3px 3px 11px 6px #111;  
+  z-index: 100;
+}
+
+.top {
+  z-index: 100;
+}
+
+#settings {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }

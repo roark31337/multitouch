@@ -10,6 +10,9 @@ $(bc).on("init", function() {
   // pretty transform on change
   // many pictures
 
+  // background music can't touch this
+  // css class on drag to bump shadow
+  // border?
   var imgFullScreen = false,
       maxZoom = 5,
       minZoom = 1,
@@ -21,8 +24,8 @@ $(bc).on("init", function() {
       lastDragY = 0;
 
   bc.config.touchEventsEnabled = false;
-  $("img").hammer({
-    drag_min_distance: 1
+  $(".imgContainer").hammer({
+    prevent_default: true
   }).on("doubletap", function() {
     if (imgFullScreen) {      
       $(this).width( originalImgWidth );
@@ -39,12 +42,7 @@ $(bc).on("init", function() {
     imgFullScreen = !imgFullScreen;
   })
   .on("transformstart", function(evt) {
-      var touch1 = [evt.touches[0].x, evt.touches[0].y],
-          touch2 = [evt.touches[1].x, evt.touches[1].y],
-          originX = (touch1[0] + touch2[0]) / 2,
-          originY = (touch1[1] + touch2[1]) / 2;
-
-      $(this).css("-webkit-transform-origin", originX + "px " + originY + "px");
+      $(this).css("-webkit-transform-origin", evt.position.x + "px " + evt.position.y + "px");
   })
   .on("transform", function(evt) {
     var transformCSS;
@@ -52,8 +50,8 @@ $(bc).on("init", function() {
     scaleFactor = previousScaleFactor * evt.scale;
     scaleFactor = Math.max(minZoom, Math.min(scaleFactor, maxZoom));
     cssTransform = "scale(" + scaleFactor + ") rotate(" + evt.rotation + "deg)";
-    $(this).css("-webkit-transform", cssTransform);    
-    $("#debug").text("transform!");    
+    $(this).css("-webkit-transform", cssTransform);   
+
   })
   .on("transformend", function() {
     previousScaleFactor = scaleFactor;
@@ -61,20 +59,20 @@ $(bc).on("init", function() {
   .on("dragstart", function(evt) {
     lastDragX = evt.position.x;
     lastDragY = evt.position.y;
+    $(".imgContainer").removeClass("top");
+    $(this).addClass("dragging top");
   })
   .on("drag", function(evt) {
-    var el = $(this).closest(".imgContainer"),
-        deltaX = (evt.position.x - lastDragX),
+    var deltaX = (evt.position.x - lastDragX),
         deltaY = (evt.position.y - lastDragY),
-        left = el.offset().left + deltaX,
-        top = el.offset().top + deltaY;
+        left = $(this).offset().left + deltaX,
+        top = $(this).offset().top + deltaY;
 
-    console.log( deltaX + "px || " + el.offset().left + "px || " + left + "px || " + top);
     lastDragX = evt.position.x;
     lastDragY = evt.position.y;
-
-    // find imgContainer
-    el.offset({left: left, top: top});
-    // $(".imgContainer").css("-webkit-transform", "translate(" + deltaX + "px, " + deltaY + "px)");
+    $(this).offset({left: left, top: top});
+  })
+  .on("dragend", function() {
+    $(this).removeClass("dragging");
   });
 });
