@@ -23,6 +23,14 @@ $(bc).on("init", function() {
       lastDragX = 0,
       lastDragY = 0;
 
+  $(".settings").bind("tap", function() {
+    $("#card").toggleClass("flipped");
+  });
+
+  $("input").on("click", function() {
+    this.checked ? $("#player").play()  : $("#player").pause();
+  });
+
   bc.config.touchEventsEnabled = false;
   $(".imgContainer").hammer({
     prevent_default: true

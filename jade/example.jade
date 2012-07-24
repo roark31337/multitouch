@@ -16,24 +16,35 @@ html
     script(type="text/javascript", src="../javascripts/lib/jquery.hammer.js")
 
   body
-    div.imgContainer.first
-      p Neon Fish
-      img(src="http://asishsfishes.yolasite.com/resources/Neon_coral_fish_2.jpg")
+    audio(id="player", src="../music/fire.mp3", preload="auto")
 
-    div.imgContainer.second
-      p Beaked Fish
-      img(src="http://australianmuseum.net.au/Uploads/Images/2089/Beaked%20Coralfish%20448-15_big.jpg")
+    div#container
+      div#card
+        div.face.front
+          div.imgContainer.first
+            p Neon Fish
+            img(src="http://asishsfishes.yolasite.com/resources/Neon_coral_fish_2.jpg")
 
-    div.imgContainer.third
-      p Rainbow Fish
-      img(src="http://www.wallpaper77.com/upload/DesktopWallpapers/cache/Colorfull-Small-Coral-Fish-fish-wallpapers-ocean-sea-underwater-water-800x600.jpg")
+          div.imgContainer.second
+            p Beaked Fish
+            img(src="http://australianmuseum.net.au/Uploads/Images/2089/Beaked%20Coralfish%20448-15_big.jpg")
 
-    div.imgContainer.fourth
-      p Clown Fish
-      img(src="http://3.bp.blogspot.com/-NQta_tsLfac/Tv1dz9aAjuI/AAAAAAAAEL8/XP7-NCQa0r8/s1600/tie-die-fish2.jpg")
+          div.imgContainer.third
+            p Rainbow Fish
+            img(src="http://www.wallpaper77.com/upload/DesktopWallpapers/cache/Colorfull-Small-Coral-Fish-fish-wallpapers-ocean-sea-underwater-water-800x600.jpg")
 
-    div.imgContainer.fifth
-      p Angel Fish
-      img(src="http://www.goodwp.com/mini/201103/16050.jpg")
+          div.imgContainer.fourth
+            p Clown Fish
+            img(src="http://3.bp.blogspot.com/-NQta_tsLfac/Tv1dz9aAjuI/AAAAAAAAEL8/XP7-NCQa0r8/s1600/tie-die-fish2.jpg")
 
-    div#settings
+          div.imgContainer.fifth
+            p Angel Fish
+            img(src="http://www.goodwp.com/mini/201103/16050.jpg")
+
+          div.settings
+
+        div.face.back
+          div
+            p.left Enable music?
+            input.left(type="checkbox")
+          div.settings          
