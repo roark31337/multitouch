@@ -17,11 +17,13 @@ $(bc).on("init", function() {
       previousScaleFactor = 1,
       originalImgWidth,
       originalImgHeight,
-      dragStartX = 0,
-      dragStartY = 0;
+      lastDragX = 0,
+      lastDragY = 0;
 
   bc.config.touchEventsEnabled = false;
-  $("img").hammer().on("doubletap", function() {
+  $("img").hammer({
+    drag_min_distance: 1
+  }).on("doubletap", function() {
     if (imgFullScreen) {      
       $(this).width( originalImgWidth );
       $(this).height( originalImgHeight );
@@ -57,13 +59,22 @@ $(bc).on("init", function() {
     previousScaleFactor = scaleFactor;
   })
   .on("dragstart", function(evt) {
-    dragStartX = evt.position.x;
-    dragStartY = evt.position.y;
+    lastDragX = evt.position.x;
+    lastDragY = evt.position.y;
   })
   .on("drag", function(evt) {
-    var deltaX = evt.position.x - dragStartY,
-        deltaY = evt.position.y - dragStartY;
-    $("#debug").text(deltaX);
-    $(".imgContainer").css("-webkit-transform", "translate(" + deltaX + "px, " + deltaY + "px)");
+    var el = $(this).closest(".imgContainer"),
+        deltaX = (evt.position.x - lastDragX),
+        deltaY = (evt.position.y - lastDragY),
+        left = el.offset().left + deltaX,
+        top = el.offset().top + deltaY;
+
+    console.log( deltaX + "px || " + el.offset().left + "px || " + left + "px || " + top);
+    lastDragX = evt.position.x;
+    lastDragY = evt.position.y;
+
+    // find imgContainer
+    el.offset({left: left, top: top});
+    // $(".imgContainer").css("-webkit-transform", "translate(" + deltaX + "px, " + deltaY + "px)");
   });
 });
